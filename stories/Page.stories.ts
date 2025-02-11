@@ -1,19 +1,20 @@
 import { within, userEvent } from '@storybook/testing-library';
 import MyPage from './Page.vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
 
-export default {
+const meta = {
   title: 'Example/Page',
   component: MyPage,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/vue/configure/story-layout
     layout: 'fullscreen',
   },
-};
+} satisfies Meta<typeof MyPage>;
 
-export const LoggedOut = {};
+export const LoggedOut: StoryObj<typeof meta> = {};
 
 // More on interaction testing: https://storybook.js.org/docs/vue/writing-tests/interaction-testing
-export const LoggedIn = {
+export const LoggedIn: StoryObj<typeof meta> = {
   render: () => ({
     components: {
       MyPage,
@@ -28,3 +29,5 @@ export const LoggedIn = {
     await userEvent.click(loginButton);
   },
 };
+
+export default meta;
